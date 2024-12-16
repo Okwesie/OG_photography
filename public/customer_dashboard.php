@@ -84,7 +84,7 @@ $user_reviews_result = $user_reviews_stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Customer Dashboard</title>
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="../Frontend/pages/user_global.css">
 </head>
 <body>
 <div class="dashboard-container">

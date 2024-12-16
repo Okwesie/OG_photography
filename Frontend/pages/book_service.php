@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the admin
+renderSidebar($_SESSION['role']);
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -44,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book a Service</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="user_global.css">
 </head>
 <body>
 

@@ -16,6 +16,7 @@ function renderSidebar($userType) {
             ['My Orders', '../Frontend/pages/myorders.php', 'fas fa-shopping-bag'],
             ['Gallery', '../uploads/images/gallery.php', 'fas fa-images'],
             ['Profile', '../Frontend/pages/customer_profile.php', 'fas fa-user'],
+            ['Leave a Review', '../pages/leave_review.php', 'fas fa-star']
             ['Logout', '../Frontend/pages/logout.php', 'fas fa-sign-out-alt', true],
         ],
         'photographer' => [

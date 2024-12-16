@@ -71,7 +71,7 @@ if (isset($_GET['cancel']) && isset($_GET['order_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>My Orders</title>
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="user_global.css">
 </head>
 <body>
 <div class="dashboard-container">

@@ -61,7 +61,7 @@ if (isset($_GET['cancel']) && isset($_GET['booking_id'])) {
 <head>
     <meta charset="UTF-8">
     <title>My Bookings</title>
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="user_global.css">
 </head>
 <body>
 <div class="dashboard-container">

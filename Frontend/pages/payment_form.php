@@ -1,5 +1,9 @@
 <?php
 session_start();
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the admin
+renderSidebar($_SESSION['role']);
 
 // Check if order_id and amount are set in the URL
 if (!isset($_GET['order_id']) || !isset($_GET['amount'])) {
@@ -16,6 +20,8 @@ $amount = $_GET['amount'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="user_global.css">
+
     <title>Make a Payment</title>
 </head>
 <body>
