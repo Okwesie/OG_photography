@@ -1,16 +1,19 @@
 <?php
 session_start();
-// Check if user is logged in and is an admin
+require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the admin
+renderSidebar($_SESSION['role']);
+
+// Check if the user is logged in and is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header('Location: ../public/admin_dashboard.php');
+    header('Location: ../public/login.php');
     exit();
 }
 
 $pageTitle = "Manage users";
 //include 'includes/header.php';
-
-// Include database connection file
-require_once 'dbconnection.php';
 
 // Handle form submissions for adding, editing, or deleting users
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,20 +67,12 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users</title>
-    <link rel="stylesheet" href="http://localhost/OG_photo_2/Frontend/styles/manage_users.css">
-</head>
+    <link rel="stylesheet" href="admin_global.css"> <!-- Global Admin CSS --></head>
+
 <body>
 
-<header>
-    <nav>
-        <ul>
-            <li><a href="http://localhost/OG_photo_2/public/admin_dashboard.php">Dashboard</a></li>
-            <li><a href="manage_users.php">Manage Users</a></li>
-        </ul>
-    </nav>
-</header>
-
 <main>
+<div class="main-content"> 
     <h1>Manage Users</h1>
 
     <button class="add-recipe-btn" onclick="openModal('addUserModal')">Add New User</button>
@@ -102,7 +97,7 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
                     <td>
                         <button class="view-btn" onclick="viewUser(<?= $user['user_id'] ?>)">View</button>
                         <button class="edit-btn" onclick="editUser(<?= $user['user_id'] ?>)">Edit</button>
-                        <form action="" method="POST" style="display:inline-block;">
+                        <form action="" method="POST" style="display:inline-block;" onsubmit="return confirmDelete();">
                             <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
                             <button type="submit" name="delete_user" class="delete-btn">Delete</button>
                         </form>
@@ -111,6 +106,7 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
             <?php endforeach; ?>
         </tbody>
     </table>
+            </div>
 </main>
 
 <!-- Add User Modal -->
@@ -153,13 +149,16 @@ function closeModal(modalId) {
 }
 
 function editUser(userId) {
-    // Populate modal with user data
-    // Open edit user modal (similar to add user modal)
+    window.location.href = `edit_user.php?user_id=${userId}`;
 }
 
 function viewUser(userId) {
     // Redirect to view user details page
     window.location.href = `view_user.php?user_id=${userId}`;
+}
+
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this user?");
 }
 
 window.onclick = function(event) {

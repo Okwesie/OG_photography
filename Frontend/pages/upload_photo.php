@@ -9,6 +9,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'photographer') {
 
 $pageTitle = "Upload Photo";
 include 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the photographer
+renderSidebar($_SESSION['role']);
 
 // Initialize error and success messages
 $errors = [];

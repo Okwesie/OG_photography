@@ -1,1 +1,0 @@
-//USer model (handles queries and logic)

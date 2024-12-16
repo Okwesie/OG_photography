@@ -1,13 +1,18 @@
 <?php
 session_start();
-// Check if user is logged in and is a customer
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
+require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the user
+renderSidebar($_SESSION['role']);
+
+// Check if the user is logged in 
+if (!isset($_SESSION['user_id'])) {
     header('Location: ../public/login.php');
     exit();
 }
 
 $pageTitle = "Customer Profile";
-include 'dbconnection.php';
 
 // Get user details
 $user_id = $_SESSION['user_id'];

@@ -1,13 +1,18 @@
 <?php
 session_start();
-// Check if user is logged in 
+require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the user
+renderSidebar($_SESSION['role']);
+
+// Check if the user is logged in 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../public/login.php');
     exit();
 }
 
 $pageTitle = "My Bookings";
-include 'dbconnection.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -67,6 +72,11 @@ if (isset($_GET['cancel']) && isset($_GET['booking_id'])) {
 
     <div class="main-content">
         <h1>My Bookings</h1>
+
+        <!-- Button to create a new booking -->
+        <div class="create-booking">
+            <a href="book_service.php" class="btn btn-primary">Create New Booking</a>
+        </div>
 
         <?php if (isset($success_message)): ?>
             <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>

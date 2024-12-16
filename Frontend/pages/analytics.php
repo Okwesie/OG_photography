@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the admin or user
+renderSidebar($_SESSION['role']);
 
 // Fetch user growth data
 $user_growth_sql = "SELECT DATE(created_at) AS date, COUNT(*) AS userCount 
@@ -66,6 +70,7 @@ while ($row = $customer_satisfaction_result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OG_Photography - Analytics</title>
+    <link rel="stylesheet" href="admin_global.css"> <!-- Global Admin CSS -->
 
     <style>
         /* Add your CSS styles here */
@@ -96,6 +101,7 @@ while ($row = $customer_satisfaction_result->fetch_assoc()) {
     </style>
 </head>
 <body>
+<div class="main-content"> 
     <div class="container">
         <h1>OG_Photography Analytics</h1>
 
@@ -238,5 +244,6 @@ while ($row = $customer_satisfaction_result->fetch_assoc()) {
             }
         });
     </script>
+</div>
 </body>
 </html>

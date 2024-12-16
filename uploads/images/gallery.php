@@ -1,5 +1,9 @@
 <?php
 session_start();
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar based on user role
+renderSidebar($_SESSION['role']);
 
 $pageTitle = "Gallery";
 $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'all';
@@ -49,15 +53,10 @@ $images = [
 <body>
     <header>
         <h1>OG_Photography Gallery</h1>
-        <nav>
-            <a href="index.php">Home</a>
-            <a href="gallery.php" class="active">Gallery</a>
-            <a href="login.php">Login</a>
-            <a href="signup.php">Sign Up</a>
-        </nav>
     </header>
 
     <main>
+
         <section id="search-section">
             <input type="text" id="search-bar" placeholder="Search photos...">
             <select id="category-filter">
@@ -68,6 +67,8 @@ $images = [
             </select>
         </section>
 
+
+        <div class="main-content"> 
         <section id="gallery-container">
             <?php
             if ($selectedCategory === 'all') {
@@ -87,6 +88,7 @@ $images = [
             }
             ?>
         </section>
+        </div>
     </main>
 
     <div id="lightbox" class="hidden">

@@ -1,13 +1,18 @@
 <?php
 session_start();
-// Check if user is logged in 
+require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the user
+renderSidebar($_SESSION['role']);
+
+// Check if the user is logged in 
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../public/login.php');
     exit();
 }
 
 $pageTitle = "My Orders";
-include 'dbconnection.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -78,6 +83,11 @@ if (isset($_GET['cancel']) && isset($_GET['order_id'])) {
     <div class="main-content">
         <h1>My Orders</h1>
 
+        <!-- Button to create a new order -->
+        <div class="create-order">
+            <a href="create_order.php" class="btn btn-primary">Create New Order</a>
+        </div>
+
         <?php if (isset($success_message)): ?>
             <div class="alert alert-success"><?php echo htmlspecialchars($success_message); ?></div>
         <?php endif; ?>
@@ -88,7 +98,7 @@ if (isset($_GET['cancel']) && isset($_GET['order_id'])) {
 
         <?php if ($orders_result->num_rows == 0): ?>
             <div class="no-orders">
-                <p>You have no orders yet. <a href="view_galleries.php">Browse Galleries</a></p>
+                <p>You have no orders yet. <a href="create_order.php">Create an Order</a></p>
             </div>
         <?php else: ?>
             <div class="orders-container">

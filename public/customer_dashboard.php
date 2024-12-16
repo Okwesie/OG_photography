@@ -90,7 +90,7 @@ $user_reviews_result = $user_reviews_stmt->get_result();
 <div class="dashboard-container">
     <?php 
     include '../Frontend/components/sidebar.php';
-    renderSidebar('user');
+    renderSidebar('customer');
     ?>
 
     <div class="main-content">

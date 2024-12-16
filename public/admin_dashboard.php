@@ -82,7 +82,7 @@ $user_growth_json = json_encode($user_growth_data);
     ?>
 
     <div class="main-content">
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="../Frontend/pages/admin_global.css">
         <h1>Welcome to the Admin Dashboard</h1>
         
 

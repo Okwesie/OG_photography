@@ -1,10 +1,14 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+// Render the sidebar for the admin
+renderSidebar($_SESSION['role']);
+
+// Check if the user is logged in and is an admin
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+    header('Location: ../public/login.php');
     exit();
 }
 
@@ -54,9 +58,9 @@ if (isset($_GET['delete_order_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Orders</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
+    <link rel="stylesheet" href="admin_global.css"> <!-- Global Admin CSS --></head>
 <body>
+<div class="main-content">
     <div class="container">
         <h1>Manage Orders</h1>
         
@@ -125,5 +129,6 @@ if (isset($_GET['delete_order_id'])) {
             </tbody>
         </table>
     </div>
+</div>    
 </body>
 </html>
