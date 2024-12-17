@@ -23,7 +23,7 @@ $result = json_decode($response, true);
 
 if ($result['status']) {
     echo 'Payment was successful!';
-    // You can log this to the database or update a record
+
 } else {
     echo 'Payment verification failed: ' . $result['message'];
 }

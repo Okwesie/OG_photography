@@ -7,6 +7,7 @@ function renderSidebar($userType) {
             ['Manage Orders', 'http://localhost/OG_photo_2/Frontend/pages/manage_orders.php', 'fas fa-shopping-cart'],
             ['Manage Gallery', 'http://localhost/OG_photo_2/Frontend/pages/manage_gallery.php', 'fas fa-images'],
             ['Analytics', 'http://localhost/OG_photo_2/Frontend/pages/analytics.php', 'fas fa-chart-bar'],
+            ['Manage Bookings', 'http://localhost/OG_photo_2/Frontend/pages/manage_bookings.php', 'fas fa-calendar-check'],
             ['Settings', 'http://localhost/OG_photo_2/Frontend/pages/settings.php', 'fas fa-cog'],
             ['Logout', 'http://localhost/OG_photo_2/Frontend/pages/logout.php', 'fas fa-sign-out-alt', true],
         ],

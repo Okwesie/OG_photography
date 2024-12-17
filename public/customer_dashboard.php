@@ -112,100 +112,119 @@ $user_reviews_result = $user_reviews_stmt->get_result();
         </div>
 
         <div class="dashboard-grid">
-            <div class="dashboard-item">
-                <h2>Upcoming Bookings</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Status</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($booking = $upcoming_bookings_result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($booking['service_name']); ?></td>
-                            <td><?php echo date('Y-m-d', strtotime($booking['event_date'])); ?></td>
-                            <td><?php echo date('H:i', strtotime($booking['event_time'])); ?></td>
-                            <td><?php echo ucfirst($booking['status']); ?></td>
-                            <td>$<?php echo number_format($booking['base_price'], 2); ?></td>
-                        </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="dashboard-item">
-                <h2>Past Bookings</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($past_booking = $past_bookings_result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($past_booking['service_name']); ?></td>
-                            <td><?php echo date('Y-m-d', strtotime($past_booking['event_date'])); ?></td>
-                            <td><?php echo ucfirst($past_booking['status']); ?></td>
-                            <td>
-                                <a href="book_again.php?service=<?php echo urlencode($past_booking['service_name']); ?>" class="btn btn-small">Book Again</a>
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="dashboard-item">
-                <h2>Recent Purchases</h2>
-                <?php while ($purchase = $recent_purchases_result->fetch_assoc()): ?>
-                <div class="purchase-item">
-                    <div class="purchase-header">
-                        <span class="purchase-date"><?php echo date('Y-m-d H:i', strtotime($purchase['order_date'])); ?></span>
-                        <span class="purchase-status <?php echo strtolower($purchase['status']); ?>">
-                            <?php echo ucfirst($purchase['status']); ?>
-                        </span>
+                <div class="dashboard-item">
+            <h2>Upcoming Bookings</h2>
+            <div class="card-content">
+                <div class="card-scroll">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($booking = $upcoming_bookings_result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($booking['service_name']); ?></td>
+                                    <td><?php echo date('Y-m-d', strtotime($booking['event_date'])); ?></td>
+                                    <td><?php echo date('H:i', strtotime($booking['event_time'])); ?></td>
+                                    <td>
+                                        <span class="status-badge status-<?php echo strtolower($booking['status']); ?>">
+                                            <?php echo ucfirst($booking['status']); ?>
+                                        </span>
+                                    </td>
+                                    <td>$<?php echo number_format($booking['base_price'], 2); ?></td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <p class="purchase-items"><?php echo htmlspecialchars($purchase['purchased_items']); ?></p>
-                    <p class="purchase-total">Total: $<?php echo number_format($purchase['total_amount'], 2); ?></p>
                 </div>
-                <?php endwhile; ?>
             </div>
+        </div>
 
-            <div class="dashboard-item">
-                <h2>My Reviews</h2>
-                <?php while ($review = $user_reviews_result->fetch_assoc()): ?>
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-rating">
-                            Rating: <?php 
-                            echo str_repeat('★', $review['rating']) . 
-                                 str_repeat('☆', 5 - $review['rating']); 
-                            ?>
-                        </span>
-                        <span class="review-service"><?php echo htmlspecialchars($review['service_name']); ?></span>
+        <div class="dashboard-item">
+            <h2>Past Bookings</h2>
+            <div class="card-content">
+                <div class="card-scroll">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while ($past_booking = $past_bookings_result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($past_booking['service_name']); ?></td>
+                                    <td><?php echo date('Y-m-d', strtotime($past_booking['event_date'])); ?></td>
+                                    <td>
+                                        <span class="status-badge status-<?php echo strtolower($past_booking['status']); ?>">
+                                            <?php echo ucfirst($past_booking['status']); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="book_again.php?service=<?php echo urlencode($past_booking['service_name']); ?>" class="btn btn-small">Book Again</a>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <p class="review-text"><?php echo htmlspecialchars($review['review_text']); ?></p>
-                    <p class="review-date"><?php echo date('Y-m-d', strtotime($review['created_at'])); ?></p>
                 </div>
-                <?php endwhile; ?>
             </div>
+        </div>
 
-            <div class="dashboard-item">
-                <h2>Quick Actions</h2>
-                <div class="quick-actions">
-                    <a href="book_service.php" class="btn">Book a Service</a>
-                    <a href="view_galleries.php" class="btn">Browse Galleries</a>
-                    <a href="edit_profile.php" class="btn">Edit Profile</a>
-                    <a href="my_purchases.php" class="btn">My Purchases</a>
+        <div class="dashboard-item">
+            <h2>Recent Purchases</h2>
+            <div class="card-content">
+                <div class="card-scroll">
+                    <div class="purchase-list">
+                        <?php while ($purchase = $recent_purchases_result->fetch_assoc()): ?>
+                        <div class="purchase-item">
+                            <div class="purchase-header">
+                                <span class="purchase-date"><?php echo date('Y-m-d H:i', strtotime($purchase['order_date'])); ?></span>
+                                <span class="status-badge status-<?php echo strtolower($purchase['status']); ?>">
+                                    <?php echo ucfirst($purchase['status']); ?>
+                                </span>
+                            </div>
+                            <p class="purchase-items"><?php echo htmlspecialchars($purchase['purchased_items']); ?></p>
+                            <p class="purchase-total">Total: $<?php echo number_format($purchase['total_amount'], 2); ?></p>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-item">
+            <h2>My Reviews</h2>
+            <div class="card-content">
+                <div class="card-scroll">
+                    <?php while ($review = $user_reviews_result->fetch_assoc()): ?>
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-rating">
+                                Rating: <?php 
+                                echo str_repeat('★', $review['rating']) . 
+                                    str_repeat('☆', 5 - $review['rating']); 
+                                ?>
+                            </span>
+                            <span class="review-service"><?php echo htmlspecialchars($review['service_name']); ?></span>
+                        </div>
+                        <p class="review-text"><?php echo htmlspecialchars($review['review_text']); ?></p>
+                        <p class="review-date"><?php echo date('Y-m-d', strtotime($review['created_at'])); ?></p>
+                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
         </div>

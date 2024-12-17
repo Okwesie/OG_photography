@@ -1,3 +1,4 @@
+@import url('shared_dashboard.css');
 /* user_global.css */
 
 :root {
@@ -8,6 +9,8 @@
     --background-color: #ecf0f1;
     --sidebar-width: 250px;
   }
+
+
   
   /* Global Styles */
   body {
@@ -195,6 +198,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
+
   }
   
   .summary-card {
@@ -202,7 +206,7 @@
     background-color: #fff;
     border-radius: 8px;
     padding: 1.5rem;
-    margin-right: 1rem;
+    margin-right: 3rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
   }
@@ -239,6 +243,9 @@
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .special_container{
+
   }
   
   /* Bookings and Orders */

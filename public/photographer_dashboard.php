@@ -157,8 +157,13 @@ $orders_result = $orders_stmt->get_result();
         </div>
 
         <div class="dashboard-grid">
-            <div class="dashboard-item">
-                <h2>Bookings</h2>
+ <!-- ... (PHP code remains the same until the HTML) ... -->
+
+<div class="dashboard-item">
+    <h2>Bookings</h2>
+    <div class="card-content">
+        <div class="card-scroll">
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -176,17 +181,25 @@ $orders_result = $orders_stmt->get_result();
                             <td><?php echo date('Y-m-d', strtotime($booking['event_date'])); ?></td>
                             <td><?php echo date('H:i', strtotime($booking['event_time'])); ?></td>
                             <td><?php echo htmlspecialchars($booking['location']); ?></td>
-                            <td class="status-<?php echo strtolower($booking['status']); ?>">
-                                <?php echo ucfirst($booking['status']); ?>
+                            <td>
+                                <span class="status-badge status-<?php echo strtolower($booking['status']); ?>">
+                                    <?php echo ucfirst($booking['status']); ?>
+                                </span>
                             </td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
 
-            <div class="dashboard-item">
-                <h2>My Galleries</h2>
+<div class="dashboard-item">
+    <h2>My Galleries</h2>
+    <div class="card-content">
+        <div class="card-scroll">
+            <div class="gallery-grid">
                 <?php while ($gallery = $galleries_result->fetch_assoc()): ?>
                 <div class="gallery-item">
                     <h3><?php echo htmlspecialchars($gallery['title']); ?></h3>
@@ -198,9 +211,15 @@ $orders_result = $orders_stmt->get_result();
                 </div>
                 <?php endwhile; ?>
             </div>
+        </div>
+    </div>
+</div>
 
-            <div class="dashboard-item">
-                <h2>Recent Photo Sales</h2>
+<div class="dashboard-item">
+    <h2>Recent Photo Sales</h2>
+    <div class="card-content">
+        <div class="card-scroll">
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -218,14 +237,23 @@ $orders_result = $orders_stmt->get_result();
                             <td><?php echo date('Y-m-d', strtotime($order['order_date'])); ?></td>
                             <td><?php echo $order['total_items']; ?></td>
                             <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
-                            <td class="status-<?php echo strtolower($order['status']); ?>">
-                                <?php echo ucfirst($order['status']); ?>
+                            <td>
+                                <span class="status-badge status-<?php echo strtolower($order['status']); ?>">
+                                    <?php echo ucfirst($order['status']); ?>
+                                </span>
                             </td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- ... (rest of the HTML remains the same) ... -->
+
+
         </div>
     </div>
 </div>

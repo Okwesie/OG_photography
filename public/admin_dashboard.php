@@ -191,16 +191,7 @@ $user_growth_json = json_encode($user_growth_data);
                 <canvas id="userGrowthChart"></canvas>
             </div>
 
-            <div class="dashboard-item">
-                <h2>Quick Actions</h2>
-                <div class="quick-actions">
-                    <a href="manage_users.php" class="btn">Manage Users</a>
-                    <a href="manage_orders.php" class="btn">Manage Orders</a>
-                    <a href="manage_services.php" class="btn">Manage Services</a>
-                    <a href="manage_gallery.php" class="btn">Manage Gallery</a>
-                </div>
 
-            </div>
             
         </div>
     </div>

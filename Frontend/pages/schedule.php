@@ -109,6 +109,7 @@ try {
     </style>
 </head>
 <body>
+<div class="main-content">
     <div class="calendar">
         <div class="calendar-header">
             <button id="prevMonth">&larr; Previous</button>
@@ -195,5 +196,6 @@ try {
             new PhotographerCalendar(events);
         });
     </script>
+    </div>
 </body>
 </html>

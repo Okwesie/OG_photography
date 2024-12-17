@@ -6,6 +6,7 @@ function renderSidebar($userType) {
             ['Manage Users', '../pages/manage_users.php', 'fas fa-users'],
             ['Manage Orders', '../pages/manage_orders.php', 'fas fa-shopping-cart'],
             ['Manage Gallery', '../pages/manage_gallery.php', 'fas fa-images'],
+            ['Manage Bookings', '../pages/manage_bookings.php', 'fas fa-calendar-check'],
             ['Analytics', '../pages/analytics.php', 'fas fa-chart-bar'],
             ['Settings', '../pages/settings.php', 'fas fa-cog'],
             ['Logout', '../pages/logout.php', 'fas fa-sign-out-alt', true],

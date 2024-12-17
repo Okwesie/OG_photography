@@ -127,7 +127,7 @@ if (isset($_GET['cancel']) && isset($_GET['booking_id'])) {
                             <?php endif; ?>
                         </div>
                         <div class="booking-actions">
-                            <?php if (in_array($booking['status'], ['pending', 'confirmed'])): ?>
+                            <?php if (in_array($booking['status'], ['pending', 'confirmed','in_progress'])): ?>
                                 <a href="?cancel=1&booking_id=<?php echo $booking['booking_id']; ?>" 
                                    class="btn btn-danger" 
                                    onclick="return confirm('Are you sure you want to cancel this booking?');">
@@ -138,6 +138,9 @@ if (isset($_GET['cancel']) && isset($_GET['booking_id'])) {
                                 <a href="leave_review.php?booking_id=<?php echo $booking['booking_id']; ?>" class="btn btn-secondary">
                                     Leave a Review
                                 </a>
+                            <?php endif; ?>
+                            <?php if ($booking['status'] === 'in_progress'): ?>
+                                <a href="payment_form.php?booking_id=<?php echo $booking['booking_id']; ?>&amount=<?php echo $booking['total_price']; ?>" class="btn">Make Payment</a>
                             <?php endif; ?>
                         </div>
                     </div>
