@@ -173,7 +173,7 @@ $user_reviews_result = $user_reviews_stmt->get_result();
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="book_again.php?service=<?php echo urlencode($past_booking['service_name']); ?>" class="btn btn-small">Book Again</a>
+                                        <a href="../Frontend/pages/mybookings.php?service=<?php echo urlencode($past_booking['service_name']); ?>" class="btn btn-small">Book Again</a>
                                     </td>
                                 </tr>
                                 <?php endwhile; ?>

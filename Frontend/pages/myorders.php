@@ -39,7 +39,7 @@ $orders_query = "
     FROM orders_og o
     JOIN order_items_og oi ON o.order_id = oi.order_id
     JOIN photos_og p ON oi.photo_id = p.photo_id
-    WHERE o.user_id = ?
+    WHERE o.user_id = ? AND o.status NOT IN ('paid', 'cancelled', 'completed')
     GROUP BY o.order_id
     ORDER BY o.order_date DESC
 ";
@@ -75,10 +75,7 @@ if (isset($_GET['cancel']) && isset($_GET['order_id'])) {
 </head>
 <body>
 <div class="dashboard-container">
-    <?php 
-    //include '../Frontend/components/sidebar.php';
-    //renderSidebar('customer');
-    ?>
+
 
     <div class="main-content">
         <h1>My Orders</h1>
@@ -137,7 +134,7 @@ if (isset($_GET['cancel']) && isset($_GET['order_id'])) {
                                 </a>
                             <?php endif; ?>
                             <?php if ($order['status'] == 'completed'): ?>
-                                <a href="reorder.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-secondary">
+                                <a href="create_order.php?order_id=<?php echo $order['order_id']; ?>" class="btn btn-secondary">
                                     Reorder
                                 </a>
                             <?php endif; ?>

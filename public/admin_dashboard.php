@@ -184,15 +184,7 @@ $user_growth_json = json_encode($user_growth_data);
                     <p class="review-user">- <?php echo htmlspecialchars($review['username']); ?></p>
                 </div>
                 <?php endwhile; ?>
-            </div>
-
-            <div class="dashboard-item">
-                <h2>User Growth (Last 30 Days)</h2>
-                <canvas id="userGrowthChart"></canvas>
-            </div>
-
-
-            
+            </div>  
         </div>
     </div>
 </div>
