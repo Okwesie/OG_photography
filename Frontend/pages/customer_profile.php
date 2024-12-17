@@ -52,78 +52,114 @@ $orders_result = $orders_stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Customer Profile</title>
-    <link rel="stylesheet" href="user_global.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-<div class="profile-container">
-    <?php 
-    //include '../Frontend/components/sidebar.php'; 
-    //renderSidebar('customer'); 
-    ?>
-
-    <div class="main-content">
-        <h1>Customer Profile</h1>
+    <div class="dashboard-container">
+        <?php renderSidebar($_SESSION['role']); ?>
         
-        <div class="profile-details">
-            <img src="../uploads/<?php echo htmlspecialchars($user['profile_picture']); ?>" alt="Profile Picture" class="profile-picture">
-            <p><strong>Username:</strong> <?php echo htmlspecialchars($user['username']); ?></p>
-            <p><strong>Full Name:</strong> <?php echo htmlspecialchars($user['full_name']); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
-            <p><strong>Phone Number:</strong> <?php echo htmlspecialchars($profile['phone_number']); ?></p>
-            <p><strong>Address:</strong> <?php echo htmlspecialchars($profile['address']); ?></p>
-            <p><strong>Bio:</strong> <?php echo htmlspecialchars($profile['bio']); ?></p>
-            
-            <h2>Social Media Links</h2>
-            <?php 
-            $social_links = json_decode($profile['social_media_links'], true);
-            if (!empty($social_links)) {
-                foreach ($social_links as $platform => $link) {
-                    echo "<p><strong>" . ucfirst($platform) . ":</strong> <a href='" . htmlspecialchars($link) . "' target='_blank'>" . htmlspecialchars($link) . "</a></p>";
-                }
-            } 
-            ?>
+        <div class="main-content">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <?php
+                    $initials = '';
+                    $name_parts = explode(' ', $user['full_name']);
+                    foreach ($name_parts as $part) {
+                        $initials .= strtoupper(substr($part, 0, 1));
+                    }
+                    ?>
+                    <div class="avatar-circle">
+                        <?php echo $initials; ?>
+                    </div>
+                    <div>
+                        <h1><?php echo htmlspecialchars($user['full_name']); ?></h1>
+                        <p>Customer</p>
+                    </div>
+                </div>
+
+                <div class="profile-grid">
+                    <div class="profile-section">
+                        <h2>Personal Information</h2>
+                        <div class="profile-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Username</span>
+                                <span class="detail-value"><?php echo htmlspecialchars($user['username']); ?></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Email</span>
+                                <span class="detail-value"><?php echo htmlspecialchars($user['email']); ?></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Phone</span>
+                                <span class="detail-value"><?php echo htmlspecialchars($profile['phone_number']); ?></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Address</span>
+                                <span class="detail-value"><?php echo htmlspecialchars($profile['address']); ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>Bio</h2>
+                        <p><?php echo htmlspecialchars($profile['bio']); ?></p>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h2>Your Bookings</h2>
+                    <table class="profile-table">
+                        <thead>
+                            <tr>
+                                <th>Event Date</th>
+                                <th>Event Time</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($booking = $bookings_result->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($booking['event_date']); ?></td>
+                                    <td><?php echo htmlspecialchars($booking['event_time']); ?></td>
+                                    <td><?php echo htmlspecialchars($booking['location']); ?></td>
+                                    <td><?php echo htmlspecialchars($booking['status']); ?></td>
+                                    <td>$<?php echo htmlspecialchars($booking['total_price']); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="profile-section">
+                    <h2>Your Orders</h2>
+                    <table class="profile-table">
+                        <thead>
+                            <tr>
+                                <th>Order Date</th>
+                                <th>Total Amount</th>
+                                <th>Payment Method</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($order = $orders_result->fetch_assoc()) { ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                                    <td>$<?php echo htmlspecialchars($order['total_amount']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['payment_method']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['status']); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-        <h2>Your Bookings</h2>
-        <table>
-            <tr>
-                <th>Event Date</th>
-                <th>Event Time</th>
-                <th>Location</th>
-                <th>Status</th>
-                <th>Total Price</th>
-            </tr>
-            <?php while ($booking = $bookings_result->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($booking['event_date']); ?></td>
-                    <td><?php echo htmlspecialchars($booking['event_time']); ?></td>
-                    <td><?php echo htmlspecialchars($booking['location']); ?></td>
-                    <td><?php echo htmlspecialchars($booking['status']); ?></td>
-                    <td><?php echo htmlspecialchars($booking['total_price']); ?></td>
-                </tr>
-            <?php } ?>
-        </table>
-
-        <h2>Your Orders</h2>
-        <table>
-            <tr>
-                <th>Order Date</th>
-                <th>Total Amount</th>
-                <th>Payment Method</th>
-                <th>Status</th>
-            </tr>
-            <?php while ($order = $orders_result->fetch_assoc()) { ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                    <td><?php echo htmlspecialchars($order['total_amount']); ?></td>
-                    <td><?php echo htmlspecialchars($order['payment_method']); ?></td>
-                    <td><?php echo htmlspecialchars($order['status']); ?></td>
-                </tr>
-            <?php } ?>
-        </table>
     </div>
-</div>
-
+</body>
+</html>
 <?php 
 $user_stmt->close();
 $profile_stmt->close();
@@ -131,5 +167,4 @@ $bookings_stmt->close();
 $orders_stmt->close();
 $conn->close(); 
 ?>
-</body>
-</html>
+

@@ -25,6 +25,7 @@ $amount = $_GET['amount'];
     <title>Make a Payment</title>
 </head>
 <body>
+<div class="main-content">
     <h1>Make a Payment</h1>
 
     <form action="paystack_payment.php" method="POST">
@@ -37,5 +38,6 @@ $amount = $_GET['amount'];
 
         <button type="submit">Pay Now</button>
     </form>
+</div>
 </body>
 </html>

@@ -48,62 +48,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OG_Photography - Settings</title>
-    <link rel="stylesheet" href="admin_global.css"> <!-- Global Admin CSS -->
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <div class="settings-container">
-        <div class="main-content"> <!-- Wrap in main-content div -->
-            <h1>Settings</h1>
-
-            <?php if (isset($_SESSION['success_message'])): ?>
-                <div class="success-message">
-                    <?php 
-                    echo htmlspecialchars($_SESSION['success_message']); 
-                    unset($_SESSION['success_message']); 
+    <div class="dashboard-container">
+        <?php renderSidebar($_SESSION['role']); ?>
+        
+        <div class="main-content">
+            <div class="profile-container">
+                <div class="profile-header">
+                    <?php
+                    $initials = '';
+                    $name_parts = explode(' ', $user_data['full_name']);
+                    foreach ($name_parts as $part) {
+                        $initials .= strtoupper(substr($part, 0, 1));
+                    }
                     ?>
+                    <div class="avatar-circle">
+                        <?php echo $initials; ?>
+                    </div>
+                    <div>
+                        <h1>Account Settings</h1>
+                        <p>Update your profile information</p>
+                    </div>
                 </div>
-            <?php endif; ?>
 
-            <?php if (isset($_SESSION['error_message'])): ?>
-                <div class="error-message">
-                    <?php 
-                    echo htmlspecialchars($_SESSION['error_message']); 
-                    unset($_SESSION['error_message']); 
-                    ?>
-                </div>
-            <?php endif; ?>
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="alert alert-success">
+                        <?php 
+                        echo htmlspecialchars($_SESSION['success_message']); 
+                        unset($_SESSION['success_message']); 
+                        ?>
+                    </div>
+                <?php endif; ?>
 
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="full_name">Full Name</label>
-                    <input type="text" id="full_name" name="full_name" value="<?php echo htmlspecialchars($user_data['full_name']); ?>" required>
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="alert alert-error">
+                        <?php 
+                        echo htmlspecialchars($_SESSION['error_message']); 
+                        unset($_SESSION['error_message']); 
+                        ?>
+                    </div>
+                <?php endif; ?>
+
+                <div class="profile-section">
+                    <h2>Update Profile</h2>
+                    <form action="" method="post" enctype="multipart/form-data" class="profile-form">
+                        <div class="form-group">
+                            <label for="full_name">Full Name</label>
+                            <input type="text" id="full_name" name="full_name" 
+                                   value="<?php echo htmlspecialchars($user_data['full_name']); ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" 
+                                   value="<?php echo htmlspecialchars($user_data['email']); ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">New Password</label>
+                            <input type="password" id="password" name="password" 
+                                   placeholder="Leave blank to keep current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_picture">Profile Picture</label>
+                            <input type="file" id="profile_picture" name="profile_picture">
+                        </div>
+                        <button type="submit" class="btn">Update Profile</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user_data['email']); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <div class="form-group">
-                    <label for="profile_picture">Profile Picture</label>
-                    <input type="file" id="profile_picture" name="profile_picture">
-                </div>
-                <button type="submit" class="btn">Update Profile</button>
-            </form>
-        </div> <!-- End of main-content div -->
+            </div>
+        </div>
     </div>
-
-    <script>
-        // Add any necessary JavaScript functionality here
-    </script>
 </body>
 </html>
+

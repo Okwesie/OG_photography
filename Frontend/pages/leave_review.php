@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'sidebar.php'; // Include the sidebar
+
+// Render the sidebar for the admin
+renderSidebar($_SESSION['role']);
 
 // Check if user is logged in and is a customer
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'customer') {
@@ -50,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Leave a Review</title>
-    <link rel="stylesheet" href="../Frontend/styles/admin.css"> <!-- Global Admin CSS -->
+    <link rel="stylesheet" href="user_global.css"> <!-- Global Admin CSS -->
 </head>
 <body>
     <div class="main-content">

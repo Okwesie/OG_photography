@@ -120,7 +120,7 @@ $orders_result = $orders_stmt->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Photographer Dashboard</title>
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="../Frontend/pages/photographer_global.css">
 </head>
 <body>
 <div class="dashboard-container">

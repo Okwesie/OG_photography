@@ -67,6 +67,8 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>Photographer Schedule</title>
+    <link rel="stylesheet" href="photographer_global.css">
+
     <style>
         .calendar {
             max-width: 1100px;

@@ -13,72 +13,7 @@ if (isset($_SESSION['register_error'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - OG_Photography</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #e0f2fe, #e0e7ff);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .login-container {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        h1 {
-            text-align: center;
-            color: #3b82f6;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #3b82f6;
-            color: white;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2563eb;
-        }
-        .signup-link {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        .signup-link a {
-            color: #3b82f6;
-            text-decoration: none;
-        }
-        .error-message {
-            color: #dc3545;
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .error {
-            color: tomato;
-            font-size: 0.8rem;
-            margin-top: -0.5rem;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">

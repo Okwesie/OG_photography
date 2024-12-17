@@ -79,18 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="user_global.css">
 </head>
 <body>
-
-<header>
-    <nav>
-        <ul>
-            <li><a href="../public/customer_dashboard.php">Dashboard</a></li>
-            <li><a href="myorders.php">My Orders</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
-</header>
-
 <main>
+<div class="main-content">
     <h1>Create Order</h1>
 
     <!-- Display success or error messages -->
@@ -124,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endwhile; ?>
         <button type="submit">Place Order</button>
     </form>
+        </div>
 </main>
 
 </body>

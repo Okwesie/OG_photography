@@ -92,7 +92,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <title>Upload Photo</title>
-    <link rel="stylesheet" href="../Frontend/styles/dashboard.css">
+    <link rel="stylesheet" href="photographer_global.css">
 </head>
 <body>
 
