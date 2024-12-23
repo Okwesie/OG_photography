@@ -91,7 +91,7 @@ if (isset($_SESSION['register_error'])) {
         }
         ?>
         
-        <form id="signupForm" action="register_user.php" method="POST">
+        <form id="signupForm" action="public/register_user.php" method="POST">
             <input type="text" id="name" name="name" placeholder="Full Name" required>
             <span id="nameError" class="error"></span>
             

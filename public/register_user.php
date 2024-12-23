@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../backend/config/dbconnection.php';
+require_once '../../backend/config/dbconnection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitize and validate inputs
@@ -41,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Password must be at least 8 characters long.";
     }
 
+    // Confirm password validation
+    if ($password !== $_POST['confirm_password']) {
+        $errors[] = "Passwords do not match.";
+    }
+
     // If there are validation errors
     if (!empty($errors)) {
         $_SESSION['register_error'] = implode(" ", $errors);
@@ -57,6 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Create a username from the full name (remove spaces, convert to lowercase)
     $username = strtolower(str_replace(' ', '', $name));
     
+    // Check if username already exists
+    $usernameCount = 0;
+    $username_stmt = $conn->prepare("SELECT COUNT(*) FROM users_og WHERE username = ?");
+    $username_stmt->bind_param("s", $username);
+    $username_stmt->execute();
+    $username_stmt->bind_result($usernameCount);
+    $username_stmt->fetch();
+    $username_stmt->close();
+
+    if ($usernameCount > 0) {
+        $errors[] = "Username is already taken.";
+    }
+
     $stmt->bind_param("sssss", $username, $email, $hashedPassword, $name, $role);
 
     if ($stmt->execute()) {
